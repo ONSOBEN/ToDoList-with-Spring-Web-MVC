@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import todo.spring.todospring.model.Todo;
 import todo.spring.todospring.repository.TodoRepository;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/todo")
 public class TodoController {
@@ -25,7 +27,7 @@ public class TodoController {
     @GetMapping("/{id}")
     public String view(@PathVariable Long id, Model model) {
         model.addAttribute("todo", todoRepository.findById(id).orElseThrow());
-        return "view";
+        return "redirect:/todo";
     }
 
     @GetMapping("/new")
@@ -48,7 +50,13 @@ public class TodoController {
 
     @PostMapping("/edit/{id}")
     public String update(@PathVariable Long id, @ModelAttribute Todo todo) {
-        todoRepository.save(todo); // assuming this method updates if id already exists
+
+        Todo existingTodo = todoRepository.findById(id).orElseThrow();
+
+        todo.setId(existingTodo.getId());
+        todoRepository.delete(todo);
+        todoRepository.save(todo);
+
         return "redirect:/todo";
     }
 
@@ -59,8 +67,9 @@ public class TodoController {
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam String task, @RequestParam boolean isDone, Model model) {
-        model.addAttribute("todos", todoRepository.search(task, isDone));
+    public String search(@RequestParam String task, @RequestParam Boolean isDone, Model model) {
+        List<Todo> todos = todoRepository.search(task, isDone);
+        model.addAttribute("todos", todos);
         return "redirect:/todo";
     }
 }

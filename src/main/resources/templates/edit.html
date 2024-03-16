@@ -10,9 +10,9 @@
       <h1 class="text-center">Todo List</h1>
           <section class="d-flex justify-content-center border border-1 p-4">
           <form action="#" th:action="@{/todo/edit/{id}(id=${todo.getId})}" th:object="${todo}" method="post" class="w-50 container">
-              <h1>Edit Person</h1>
+              <h1>Edit Todo List</h1>
               <div data-mdb-input-init class="form-outline mb-2">
-                  <input type="number" id="id" name="id" class="form-control" th:field="*{id}" />
+                  <input type="number" id="id" name="id" class="form-control" th:field="*{id}"  readonly />
                   <label class="form-label" for="id" ></label>
               </div>
               <!-- Task input -->

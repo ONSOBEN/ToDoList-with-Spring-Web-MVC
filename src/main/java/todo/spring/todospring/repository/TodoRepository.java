@@ -3,6 +3,7 @@ package todo.spring.todospring.repository;
 import org.springframework.stereotype.Repository;
 import todo.spring.todospring.model.Todo;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class TodoRepository {
     }
 
     public Todo save(Todo todo) {
+        todo.setCreatedAt(LocalDate.now());
         todoList.add(todo);
         return todo;
     }
@@ -34,7 +36,7 @@ public class TodoRepository {
 
     public List<Todo> search(String task, boolean isDone) {
         return todoList.stream()
-                .filter(todo -> todo.getTask().equalsIgnoreCase(task) && todo.isDone() == isDone)
+                .filter(todo -> todo.getTask().toLowerCase().contains(task.toLowerCase()) ||  todo.isDone() == isDone)
                 .collect(Collectors.toList());
     }
 }

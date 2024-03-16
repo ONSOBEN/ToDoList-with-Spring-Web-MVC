@@ -24,11 +24,15 @@
                 <textarea class="form-control" id="description" name="description" rows="4" placeholder="Description" required></textarea>
             </div>
 
+
             <!-- IsDone checkbox -->
             <div data-mdb-input-init class="form-outline mb-4">
                 <input type="hidden" id="isDoneHidden" name="isDone" value="false" />
-                <input type="checkbox" id="isDone" name="isDone" th:checked="${todo.isDone()}" value="true" />
-
+                <input type="checkbox"
+                       id="isDone"
+                       name="isDone"
+                       th:checked="${todo.isDone != null && todo.isDone}"
+                       value="true"/>
                 <label class="form-check-label" for="isDone">isDone</label>
             </div>
             <!-- Submit button -->

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -14,7 +14,7 @@
                 <input type="text" id="task" name="task" class="form-control" placeholder="Task"/>
             </div>
             <div data-mdb-input-init class="form-outline mb-2">
-                <select class="form-control" id="isDone1" name="isDone">
+                <select class="form-control" id="isDone" name="isDone">
                     <option selected disabled value="true">Choose is done status</option>
                     <option value="true">True</option>
                     <option value="false">False</option>
@@ -49,20 +49,18 @@
             <tr th:each="todo : ${todos}">
                 <td th:text="${todo.getId()}"></td>
                 <td>
-
-                    <p class="fw-normal mb-1" th:text="${todo.task}"></p>
+                    <p class="fw-normal mb-1" th:text="${todo.getTask()}"></p>
                 </td>
                 <td>
                     <p class="fw-normal mb-1" th:text="${todo.getDescription()}"></p>
                 </td>
                 <td>
-                    <p class="fw-normal mb-1" th:text="${todo.done}"></p>
+                    <p class="fw-normal mb-1" th:text="${todo.isDone()}"></p>
                 </td>
                 <td>
                     <p class="fw-normal mb-1" th:text="${todo.getCreatedAt()}"></p>
                 </td>
                 <td>
-                    <a th:href="@{/todo/{id}(id=${todo.getId()})}" class="btn btn-secondary" data-mdb-ripple-init>View</a>
                     <a th:href="@{/todo/delete/{id}(id=${todo.getId})}" class="btn btn-danger" data-mdb-ripple-init>Delete</a>
                     <a th:href="@{/todo/edit/{id}(id=${todo.getId})}" class="btn btn-info" data-mdb-ripple-init>Edit</a>
                 </td>
