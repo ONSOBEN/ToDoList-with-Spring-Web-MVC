@@ -12,17 +12,17 @@ import java.util.List;
 @Controller
 @RequestMapping("/todo")
 public class TodoController {
-    private TodoRepository todoRepository;
+    private final TodoRepository todoRepository;
 
     public TodoController(TodoRepository todoRepository) {
         this.todoRepository = todoRepository;
     }
 
-    @GetMapping
-    public String list(Model model) {
+@GetMapping
+public String viewPage(Model model){
         model.addAttribute("todos", todoRepository.findAll());
         return "index";
-    }
+}
 
     @GetMapping("/{id}")
     public String view(@PathVariable Long id, Model model) {

@@ -1,6 +1,7 @@
 package todo.spring.todospring.repository;
 // TodoRepository.java
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import todo.spring.todospring.model.Todo;
 
 import java.time.LocalDate;
@@ -9,14 +10,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
+@Service
 public class TodoRepository {
-    private List<Todo> todoList;
+    private final List<Todo> todoList;
 
     public TodoRepository(List<Todo> todoList) {
         this.todoList = todoList;
     }
 
-    public List<Todo> findAll() {
+public List<Todo> findAll() {
         return todoList;
     }
 
